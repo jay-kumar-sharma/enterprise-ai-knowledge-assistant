@@ -1,0 +1,136 @@
+# Enterprise AI Knowledge Base & Customer Support Assistant
+
+An enterprise-focused AI knowledge assistant built with Java,
+Spring Boot, Spring AI, RAG, vector search, and LLM integration.
+
+## Overview
+
+The Enterprise AI Knowledge Base & Customer Support Assistant
+allows administrators to upload enterprise documents and enables
+authenticated users to ask natural-language questions about the
+available knowledge base.
+
+The system uses Retrieval-Augmented Generation (RAG) to retrieve
+relevant information from the knowledge base before generating
+an answer using a Large Language Model (LLM).
+
+## Objectives
+
+- Build a production-oriented Java + AI application.
+- Implement secure authentication and authorization.
+- Process and index enterprise documents.
+- Implement semantic/vector search.
+- Implement Retrieval-Augmented Generation.
+- Provide conversational AI functionality.
+- Provide API documentation.
+- Implement automated testing.
+- Containerize the application using Docker.
+- Implement Continuous Integration using GitHub Actions.
+
+## Planned Features
+
+### Authentication
+
+- User registration
+- User login
+- JWT authentication
+- Role-based authorization
+
+### Document Management
+
+- Upload documents
+- List documents
+- Delete documents
+- Process document content
+- Store document metadata
+
+### AI Knowledge Assistant
+
+- Natural-language questions
+- Semantic search
+- Retrieval-Augmented Generation
+- LLM-based responses
+- Source-aware responses
+- Conversation history
+
+### Administration
+
+- Manage knowledge-base documents
+- Manage users and roles
+
+## Technology Stack
+
+### Backend
+
+- Java
+- Spring Boot
+- Spring Security
+- Spring Data JPA
+- Hibernate
+- REST APIs
+
+### Database
+
+- PostgreSQL
+- pgvector
+
+### AI
+
+- Spring AI
+- Large Language Models
+- Embeddings
+- Retrieval-Augmented Generation
+
+### Frontend
+
+- Angular
+
+### Development Tools
+
+- Maven
+- Git
+- GitHub
+- Docker
+- Postman
+- Swagger / OpenAPI
+
+### CI/CD
+
+- GitHub Actions
+
+## Architecture
+
+The application follows a layered architecture with separate
+components for authentication, document management, AI processing,
+vector search, and conversational functionality.
+
+Detailed architecture documentation is maintained under:
+
+`docs/architecture/`
+
+## RAG Pipeline
+
+The planned Retrieval-Augmented Generation pipeline is:
+
+```text
+Document
+    ↓
+Text Extraction
+    ↓
+Text Chunking
+    ↓
+Embedding Generation
+    ↓
+Vector Storage
+    ↓
+User Question
+    ↓
+Similarity Search
+    ↓
+Relevant Context
+    ↓
+Prompt Construction
+    ↓
+LLM
+    ↓
+Generated Response
