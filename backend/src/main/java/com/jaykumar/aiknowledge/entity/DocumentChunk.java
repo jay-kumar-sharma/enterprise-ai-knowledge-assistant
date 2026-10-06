@@ -2,6 +2,9 @@ package com.jaykumar.aiknowledge.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Array;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "document_chunks")
@@ -25,4 +28,10 @@ public class DocumentChunk {
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
+
+    @JdbcTypeCode(SqlTypes.VECTOR)
+    @Array(length = 768)
+    @Column(name = "embedding")
+    private float[] embedding;
+
 }

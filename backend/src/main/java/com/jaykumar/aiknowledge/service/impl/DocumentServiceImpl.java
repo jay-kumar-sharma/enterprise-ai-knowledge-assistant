@@ -19,6 +19,7 @@ public class DocumentServiceImpl implements DocumentService {
     private final DocumentChunkRepository documentChunkRepository;
     private final PdfTextExtractor pdfTextExtractor;
     private final TextChunker textChunker;
+    private final EmbeddingService embeddingService;
 
     @Override
     public Document uploadDocument(MultipartFile file) {
@@ -45,14 +46,22 @@ public class DocumentServiceImpl implements DocumentService {
 
             for (int i = 0; i < chunks.size(); i++) {
 
+                String chunkContent = chunks.get(i);
+
+                float[] embedding =
+                        embeddingService.generateEmbedding(chunkContent);
+
                 DocumentChunk documentChunk = DocumentChunk.builder()
                         .document(savedDocument)
                         .chunkIndex(i)
-                        .content(chunks.get(i))
+                        .content(chunkContent)
+                        .embedding(embedding)
                         .build();
 
                 documentChunks.add(documentChunk);
             }
+
+
 
             // 5. Save all chunks
             documentChunkRepository.saveAll(documentChunks);
