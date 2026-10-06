@@ -1,8 +1,7 @@
 package com.jaykumar.aiknowledge.controller;
 
-import com.jaykumar.aiknowledge.entity.DocumentChunk;
+import com.jaykumar.aiknowledge.dto.VectorSearchResult;
 import com.jaykumar.aiknowledge.service.VectorSearchService;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +12,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/test/vector-search")
-@SecurityRequirement(name = "Bearer Authentication")
 @RequiredArgsConstructor
 public class VectorSearchTestController {
 
@@ -24,21 +22,22 @@ public class VectorSearchTestController {
             @RequestParam String query,
             @RequestParam(defaultValue = "5") int limit) {
 
-        List<DocumentChunk> chunks =
+        List<VectorSearchResult> searchResults =
                 vectorSearchService.search(query, limit);
 
         List<Map<String, Object>> results = new ArrayList<>();
 
-        for (DocumentChunk chunk : chunks) {
+        for (VectorSearchResult result : searchResults) {
 
-            Map<String, Object> result = new HashMap<>();
+            Map<String, Object> response = new HashMap<>();
 
-            result.put("id", chunk.getId());
-            result.put("documentId", chunk.getDocument().getId());
-            result.put("chunkIndex", chunk.getChunkIndex());
-            result.put("content", chunk.getContent());
+            response.put("id", result.id());
+            response.put("documentId", result.documentId());
+            response.put("chunkIndex", result.chunkIndex());
+            response.put("distance", result.distance());
+            response.put("content", result.content());
 
-            results.add(result);
+            results.add(response);
         }
 
         return results;

@@ -1,6 +1,6 @@
 package com.jaykumar.aiknowledge.service;
 
-import com.jaykumar.aiknowledge.entity.DocumentChunk;
+import com.jaykumar.aiknowledge.dto.VectorSearchResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +17,15 @@ public class RagService {
     public String ask(String question) {
 
         // 1. Retrieve relevant chunks
-        List<DocumentChunk> chunks =
+        List<VectorSearchResult> results =
                 vectorSearchService.search(question, 5);
 
-        // 2. Build context
-        String context = chunks.stream()
-                .map(DocumentChunk::getContent)
+        // 2. Build context from retrieved results
+        String context = results.stream()
+                .map(VectorSearchResult::content)
                 .collect(Collectors.joining("\n\n"));
 
-        // 3. Build the RAG prompt
+        // 3. Build RAG prompt
         String prompt = """
                 You are an AI knowledge assistant.
 
