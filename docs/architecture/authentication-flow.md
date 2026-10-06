@@ -57,3 +57,61 @@ Authentication is responsible for:
                 │   Client receives   │
                 │      JWT Token      │
                 └─────────────────────┘
+            
+                    
+                    Registration Flow
+                    
+                    Client
+                      │
+                      │ POST /api/v1/auth/register
+                      ▼
+                    Auth Controller
+                      │
+                      ▼
+                    Auth Service
+                      │
+                      ├── Validate request
+                      │
+                      ├── Check email
+                      │
+                      ├── Hash password
+                      │
+                      └── Create user
+                              │
+                              ▼
+                          PostgreSQL
+                          
+                          
+                          Login Flow
+                          
+                            Client
+                              │
+                              │ Email + Password
+                              ▼
+                            Auth Controller
+                              │
+                              ▼
+                            Authentication Manager
+                              │
+                              ▼
+                            User Details Service
+                              │
+                              ▼
+                            Database
+                              │
+                              ├── User found
+                              │
+                              └── Password verified
+                                      │
+                                      ▼
+                                  JWT Service
+                                      │
+                                      ▼
+                                  JWT Token
+                                      │
+                                      ▼
+                                    Client
+
+                    
+
+
